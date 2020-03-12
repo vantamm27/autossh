@@ -1,0 +1,9 @@
+[Unit]
+Description=AutoSSH tunnel service Remote port <remote listen port> to local <local port>
+After=network.target
+[Service]
+User=<local user>
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 10986 -o "PubkeyAuthentication=yes" -o "PasswordAuthentication=no" -i <private key> -N -R <remote listen port>:<local ip>:<local port> <remote ssh user>@<remote ssh ip> -p <remote ssh port>
+[Install]
+WantedBy=multi-user.target
